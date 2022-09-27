@@ -25,4 +25,27 @@ func TestRangeStudent(t *testing.T) {
 	for k, v := range m {
 		fmt.Println(k, v)
 	}
+
+	fmt.Println("--------------")
+	for i, _ := range students {
+		m[students[i].Name] = &students[i]
+	}
+	for k, v := range m {
+		fmt.Println(k, v)
+	}
+
+	fmt.Println("--------------")
+	studentsPtr := []*student{
+		{Name: "zhou", Age: 24},
+		{Name: "li", Age: 23},
+		{Name: "wang", Age: 22},
+	}
+	for _, stu := range studentsPtr {
+		fmt.Printf("%p\n", stu)
+		m[stu.Name] = stu
+	}
+	for k, v := range m {
+		fmt.Println(k, v)
+	}
+
 }
