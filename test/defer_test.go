@@ -37,3 +37,35 @@ func TestDefer2(t *testing.T) {
 	defer calc("2", a, calc("20", a, b))
 	b = 1
 }
+
+func TestDefer3(t *testing.T) {
+	fmt.Println("--->", deferChangeReturnValue(10))
+	fmt.Println("--->", deferChangeReturnValue(30))
+	fmt.Println("--->", deferChangeReturnValue(60))
+}
+
+func deferChangeReturnValue(input int) (output int) {
+	defer func() {
+		if output > 100 {
+			output = 100
+		}
+	}()
+	output = input * 2
+	return
+}
+
+func TestDefer4(t *testing.T) {
+	fmt.Println("--->", deferCantChangeReturnValue(10))
+	fmt.Println("--->", deferCantChangeReturnValue(30))
+	fmt.Println("--->", deferCantChangeReturnValue(60))
+}
+
+func deferCantChangeReturnValue(input int) int {
+	output := input * 2
+	defer func() {
+		if output > 100 {
+			output = 100
+		}
+	}()
+	return output
+}

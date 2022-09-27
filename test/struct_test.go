@@ -63,3 +63,35 @@ func TestParentAndChild(t *testing.T) {
 	println("parent age:", parent.Age, " child2 age:", child2.Age)
 	fmt.Printf("%#v", child)
 }
+
+type Animal interface {
+	Speak(str string) string
+}
+
+type Dog struct {
+}
+
+func (d Dog) Speak(str string) string {
+	ret := "dog speak : " + str
+	fmt.Println(ret)
+	return ret
+}
+
+type Cat struct {
+}
+
+func (c *Cat) Speak(str string) (result string) {
+	result = "cat speak : " + str
+	fmt.Println(result)
+	return
+}
+
+func TestAnimal(t *testing.T) {
+	//var dog Animal = Dog{} //可编译
+	var dog Animal = &Dog{} //依然可编译
+	dog.Speak("hello world")
+
+	//var cat Animal = Cat{} //编译不过
+	var cat Animal = &Cat{}
+	cat.Speak("hello world")
+}
